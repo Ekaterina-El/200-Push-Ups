@@ -9,5 +9,15 @@
         android:id="@+id/welcomeScreen"
         android:name="ka.el.a200pushups.fragments.WelcomeScreen"
         android:label="fragment_welcome_screen"
-        tools:layout="@layout/fragment_welcome_screen" />
+        tools:layout="@layout/fragment_welcome_screen" >
+        <action
+            android:id="@+id/action_welcomeScreen_to_trainWeekFragment"
+            app:destination="@id/trainWeekFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/trainWeekFragment"
+        android:name="ka.el.a200pushups.fragments.TrainWeekFragment"
+        android:label="TrainWeekFragment"
+        tools:layout="@layout/fragment_train_week"
+        />
 </navigation>

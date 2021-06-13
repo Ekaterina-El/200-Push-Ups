@@ -24,4 +24,8 @@
     <string name="tester_title">Тест на выносливость</string>
     <string name="tester_description">Выполните максимальное количество отжиманий</string>
     <string name="ready">Готово</string>
+
+    <string name="train_week_title">План тренировок</string>
+    <string name="day_res">Перерыв 1 день</string>
+    <string name="test_title">Тест</string>
 </resources>
