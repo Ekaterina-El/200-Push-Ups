@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import ka.el.a200pushups.R
 import ka.el.a200pushups.TesterActivity
 import ka.el.a200pushups.databinding.FragmentWelcomeScreenBinding
@@ -41,6 +42,10 @@ class WelcomeScreen : Fragment() {
         startActivityForResult(Intent(requireContext(), TesterActivity::class.java), REQUEST_CODE_TESTING_ACTIVITY)
     }
 
+    fun goNextScreen() {
+        findNavController().navigate(R.id.action_welcomeScreen_to_trainWeekFragment)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -50,6 +55,7 @@ class WelcomeScreen : Fragment() {
                 Log.d("TAG", "END TEST | ${maxPushUps}")
 
                 viewModel.setCurrentMaxPushUps(maxPushUps)
+                goNextScreen()
             }
         }
     }
