@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="testerActivity"
+            type="ka.el.a200pushups.TesterActivity" />
+
+        <variable
+            name="testerViewModel"
+            type="ka.el.a200pushups.viewModel.TesterViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/purple_700"
+        android:orientation="vertical"
+        tools:context=".TesterActivity">
+
+
+        <ImageView
+            android:id="@+id/background"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/push_ups2" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:layout_marginHorizontal="30dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tester_title"
+                    android:textColor="@color/red"
+                    android:fontFamily="@font/jura"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/title_description"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tester_description"
+                    android:textColor="@color/light_gray"
+                    android:fontFamily="@font/jura"
+                    android:textSize="22sp" />
+
+                <LinearLayout
+                    android:layout_marginTop="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/counter"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/minus"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_weight="15"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:onClick="@{() -> testerViewModel.decrement()}"
+                        android:textColor="@color/light_gray"
+                        android:fontFamily="@font/jura"
+                        android:textSize="120sp" />
+
+                    <EditText
+                        android:id="@+id/value_counter"
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_weight="70"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_height="wrap_content"
+                        tools:text="0"
+                        android:inputType="numberDecimal"
+                        android:text="@{testerViewModel.counterValue.toString()}"
+                        android:textColor="@color/light_gray"
+                        android:fontFamily="@font/jura"
+                        android:textSize="80sp" />
+
+                    <TextView
+                        android:id="@+id/plus"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_weight="15"
+                        android:layout_height="wrap_content"
+                        android:text="+"
+                        android:onClick="@{() -> testerViewModel.increment()}"
+                        android:textColor="@color/light_gray"
+                        android:fontFamily="@font/jura"
+                        android:textSize="100sp" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/ready"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ready"
+                    android:textColor="@color/light_gray"
+                    android:fontFamily="@font/jura"
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    android:background="@android:color/transparent"
+                    android:textAllCaps="false"
+                    android:onClick="@{() -> testerActivity.ready()}"
+                    />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>
