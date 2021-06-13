@@ -28,4 +28,5 @@
     <string name="train_week_title">План тренировок</string>
     <string name="day_res">Перерыв 1 день</string>
     <string name="test_title">Тест</string>
+    <string name="break_time">Время отдыха %1$s</string>
 </resources>

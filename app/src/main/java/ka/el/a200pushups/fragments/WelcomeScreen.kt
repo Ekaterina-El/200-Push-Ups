@@ -17,7 +17,7 @@ import ka.el.a200pushups.viewModel.PushUpsViewModel
 
 
 class WelcomeScreen : Fragment() {
-    private lateinit var binding: FragmentWelcomeScreenBinding
+    private var binding: FragmentWelcomeScreenBinding? = null
     private val viewModel: PushUpsViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -26,13 +26,13 @@ class WelcomeScreen : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_welcome_screen, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
+        binding?.apply {
             welcomeScreen = this@WelcomeScreen
         }
     }
@@ -63,5 +63,10 @@ class WelcomeScreen : Fragment() {
     companion object {
         const val REQUEST_CODE_TESTING_ACTIVITY = 12
         const val TESTING_PUSH_UPS = "TESTING_PUSH_UPS"
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }
