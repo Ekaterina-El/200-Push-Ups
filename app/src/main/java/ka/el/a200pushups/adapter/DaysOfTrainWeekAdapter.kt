@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import ka.el.a200pushups.R
 import ka.el.a200pushups.utils.Time
@@ -16,7 +17,8 @@ class DaysOfTrainWeekAdapter(
     var context: Context,
     var breaks: List<Int>,
     var days: List<List<Int>>,
-    var currentDay: Int
+    var currentDay: Int,
+    var navController: NavController
 ) : RecyclerView.Adapter<DaysOfTrainWeekAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -72,6 +74,7 @@ class DaysOfTrainWeekAdapter(
         when {
             day == currentDay -> {
                 holder.statusImg.setImageResource(R.drawable.ic_arrow)
+                holder.statusImg.setOnClickListener { view -> goTrainScreen() }
             }
             currentDay > day  -> {
                 holder.statusImg.setImageResource(R.drawable.ic_done)
@@ -82,6 +85,11 @@ class DaysOfTrainWeekAdapter(
         }
 
     }
+
+    private fun goTrainScreen() {
+        navController.navigate(R.id.action_trainWeekFragment_to_trainFragment)
+    }
+
 
     override fun getItemCount() = days.size
 

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import ka.el.a200pushups.R
 import ka.el.a200pushups.adapter.DaysOfTrainWeekAdapter
 import ka.el.a200pushups.databinding.FragmentTrainWeekBinding
@@ -37,10 +38,11 @@ class TrainWeekFragment : Fragment() {
         var trainWeek = pushUpsViewModel.currentTrainWeek.value
 
         var adapter = DaysOfTrainWeekAdapter(
-            requireContext(),
-            trainWeek!!.breaks,
-            trainWeek.days,
-            pushUpsViewModel.currentDay.value!!
+            context = requireContext(),
+            breaks = trainWeek!!.breaks,
+            days = trainWeek.days,
+            currentDay = pushUpsViewModel.currentDay.value!!,
+            navController = findNavController()
         )
 
         binding!!.recyclerView.adapter = adapter

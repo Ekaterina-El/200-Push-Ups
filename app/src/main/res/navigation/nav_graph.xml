@@ -19,7 +19,11 @@
         android:name="ka.el.a200pushups.fragments.TrainWeekFragment"
         android:label="TrainWeekFragment"
         tools:layout="@layout/fragment_train_week"
-        />
+        >
+        <action
+            android:id="@+id/action_trainWeekFragment_to_trainFragment"
+            app:destination="@id/trainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/splashFragment"
         android:name="ka.el.a200pushups.fragments.SplashFragment"
@@ -36,4 +40,9 @@
             app:popUpToInclusive="true"
             app:launchSingleTop="true" />
     </fragment>
+    <fragment
+        android:id="@+id/trainFragment"
+        android:name="ka.el.a200pushups.fragments.TrainFragment"
+        tools:layout="@layout/fragment_train"
+        android:label="TrainFragment" />
 </navigation>

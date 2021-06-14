@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ka.el.a200pushups.data.TrainWeek
+import ka.el.a200pushups.data.TrainWeekData
 
 class TrainViewModel : ViewModel() {
     private var _currentTrainWeek = MutableLiveData<TrainWeek>()
@@ -43,5 +44,6 @@ class TrainViewModel : ViewModel() {
 
     init {
         _counterValue.value = 0
+        _currentTrainWeek.value = TrainWeekData().getTrainByLevel(1)
     }
 }

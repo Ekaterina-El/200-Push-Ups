@@ -1,6 +1,8 @@
 package ka.el.a200pushups.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +43,22 @@ class TrainFragment : Fragment() {
             trainVM = trainViewModel
         }
 
+        binding?.valueCounter?.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {}
 
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    trainViewModel.setCounterValue(s.toString().toInt())
+                }
+
+                override fun afterTextChanged(s: Editable?) {}
+
+            }
+        )
     }
 }
