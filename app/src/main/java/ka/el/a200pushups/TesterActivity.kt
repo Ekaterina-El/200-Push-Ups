@@ -70,7 +70,12 @@ class TesterActivity : AppCompatActivity() {
         spEdit.putInt(getString(R.string.max_push_ups_setting), maxPushUps)
         spEdit.apply()
 
-        Log.d("saveToSharedPreferences", "maxPushUps: ${sharedPreferences.getInt(getString(R.string.max_push_ups_setting), -1)}")
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("saveToSharedPreferences", "onDestroy")
 
     }
 }

@@ -19,15 +19,31 @@
             android:gravity="center"
             android:orientation="vertical">
 
+            <RelativeLayout
+                android:layout_width="32dp"
+                android:layout_height="32dp">
+                <TextView
+                    android:id="@+id/numberDayOfWeek"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="1"
+                    android:gravity="center"
+                    android:textColor="@color/light_gray"
+                    android:fontFamily="@font/jura"
+                    android:textSize="22sp" />
+
+                <ImageView
+                    android:id="@+id/train_icon"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_muscular" />
+
+            </RelativeLayout>
+
+
             <TextView
-                android:id="@+id/numberDayOfWeek"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1"
-                android:textColor="@color/light_gray"
-                android:fontFamily="@font/jura"
-                android:textSize="22sp" />
-            <TextView
+                android:id="@+id/day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="День"
@@ -70,12 +86,12 @@
 
 
     <TextView
+        android:id="@+id/break_day"
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:background="#32DDDDDD"
         android:text="@string/day_res"
-        android:textColor="@color/light_gray"
+        android:textColor="@color/red"
         android:fontFamily="@font/jura"
         android:textSize="14sp"
         android:gravity="center"/>

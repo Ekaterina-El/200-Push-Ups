@@ -1,12 +1,7 @@
 package ka.el.a200pushups.viewModel
 
-import android.transition.Transition
-import android.util.Log
-import android.view.animation.Transformation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.ViewModel
 import ka.el.a200pushups.data.TrainWeek
 import ka.el.a200pushups.data.TrainWeekData
@@ -37,6 +32,13 @@ class PushUpsViewModel: ViewModel() {
     private var _currentTrainWeek = MutableLiveData<TrainWeek>()
     val currentTrainWeek: LiveData<TrainWeek> get() = _currentTrainWeek
 
+    private var _app_is_loaded = MutableLiveData<Boolean>(false)
+    val app_is_loaded: LiveData<Boolean> get() = _app_is_loaded
+    fun appWasLoaded() {
+        _app_is_loaded.value = true
+    }
+
+
     init {
         _currentMaxPushUps.value = 0
         _currentWeek.value = 1
@@ -52,7 +54,7 @@ class PushUpsViewModel: ViewModel() {
         val currentWeek = _trainWeekData.getTrainByMaxPushUps(_currentMaxPushUps.value!!)
         _currentTrainWeek.value = currentWeek
 
-        _currentDay.value = 1
+        _currentDay.value = 4 //
         _currentLevel.value = currentWeek.numberOfLevels
         _currentLevelName.value = currentWeek.nameOfLevel
     }

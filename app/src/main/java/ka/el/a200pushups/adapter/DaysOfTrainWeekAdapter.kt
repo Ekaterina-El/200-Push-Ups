@@ -23,6 +23,10 @@ class DaysOfTrainWeekAdapter(
         val numberDayOfWeek: TextView
         val trainSet: TextView
         val timeBreak: TextView
+        val breakDay: TextView
+        val day: TextView
+
+        val trainIcon: ImageView
         val statusImg: ImageView
 
         init {
@@ -30,6 +34,9 @@ class DaysOfTrainWeekAdapter(
             trainSet = itemView.findViewById(R.id.trainSet)
             timeBreak = itemView.findViewById(R.id.timeBreak)
             statusImg = itemView.findViewById(R.id.status_img)
+            breakDay = itemView.findViewById(R.id.break_day)
+            day = itemView.findViewById(R.id.day)
+            trainIcon = itemView.findViewById(R.id.train_icon)
         }
     }
 
@@ -42,10 +49,25 @@ class DaysOfTrainWeekAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val day = position + 1
 
-        holder.numberDayOfWeek.text = day.toString()
-        holder.trainSet.text = days[position].joinToString(" ") // [1, 2, 3, 4, 5]
-        holder.timeBreak.text =
-            context.resources.getString(R.string.break_time, time.secondsToMinute(breaks[position]))
+        if (days[position][0] != 0) {
+            // If it`s simple train day //
+            holder.numberDayOfWeek.text = day.toString()
+            holder.trainSet.text = days[position].joinToString(" ")
+            holder.timeBreak.text =
+                context.resources.getString(R.string.break_time, time.secondsToMinute(breaks[position]))
+        } else {
+            // If it`s day for tasting //
+
+            holder.numberDayOfWeek.visibility = View.GONE
+
+            holder.trainSet.text = context.getString(R.string.tester_description)
+            holder.trainSet.textSize = 16f
+
+            holder.timeBreak.visibility = View.GONE
+            holder.breakDay.visibility = View.GONE
+            holder.trainIcon.visibility = View.VISIBLE
+            holder.day.text = context.getString(R.string.test_title)
+        }
 
         when {
             day == currentDay -> {

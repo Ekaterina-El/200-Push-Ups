@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.200PushUps">
-        <activity android:name=".TesterActivity">
+        <activity android:name=".TesterActivity"
+            android:noHistory="true">
 
         </activity>
         <activity android:name=".MainActivity">
