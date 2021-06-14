@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -26,6 +25,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/ic_muscular_red"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:id="@+id/title_app"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/jura"
+                    android:text="@string/app_name"
+                    android:textColor="@color/red"
+                    android:textSize="28sp"
+                    android:layout_marginBottom="70dp"
+                    />
+
+
 
                 <TextView
                     android:id="@+id/title"

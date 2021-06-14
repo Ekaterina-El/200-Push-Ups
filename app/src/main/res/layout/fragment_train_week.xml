@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/purple_700"
-        android:padding="20dp"
         tools:context=".fragments.TrainWeekFragment">
 
         <LinearLayout
@@ -22,7 +21,126 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/background"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/push_ups" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+                    <TextView
+                        android:id="@+id/title_app"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/jura"
+                        android:text="@string/title"
+                        android:textColor="@color/red"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/week"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/title_app"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/jura"
+                        android:text="@{@string/numberOfWeek(viewModel.currentWeek)}"
+                        android:textColor="@color/light_gray"
+                        android:textSize="16sp"
+                        tools:text="Неделя: 1" />
+
+                    <TextView
+                        android:id="@+id/day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/week"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="3dp"
+                        android:fontFamily="@font/jura"
+                        android:text="@{@string/numberOfDay(viewModel.currentDay)}"
+                        android:textColor="@color/light_gray"
+                        android:textSize="16sp"
+                        tools:text="День: 1" />
+
+                    <TextView
+                        android:id="@+id/globalGoal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/day"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="50dp"
+                        android:fontFamily="@font/jura"
+                        android:text="@{@string/globalGoal(viewModel.currentGlobalGoal)}"
+                        android:textColor="@color/light_gray"
+                        android:textSize="18sp"
+                        tools:text="Цель: 200" />
+
+                    <TextView
+                        android:id="@+id/level"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/title_app"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:fontFamily="@font/jura"
+                        android:text="@{@string/level(viewModel.currentLevel)}"
+                        android:textColor="@color/light_gray"
+                        android:textSize="16sp"
+                        tools:text="Уровень: 1" />
+
+                    <TextView
+                        android:id="@+id/levelName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/level"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="20dp"
+                        android:fontFamily="@font/jura"
+                        android:text="@{viewModel.currentLevelName}"
+                        android:textColor="@color/light_gray"
+                        android:textSize="16sp"
+                        tools:text="Новичок" />
+
+                    <TextView
+                        android:id="@+id/currentMaxPushUps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/levelName"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginEnd="20dp"
+                        android:fontFamily="@font/jura"
+                        android:text="@{@string/maxPushUps(viewModel.currentMaxPushUps)}"
+                        android:textColor="@color/light_gray"
+                        android:textSize="18sp"
+                        tools:text="0" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="20dp">
+
             <TextView
+                android:layout_marginTop="20dp"
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,8 +164,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:paddingHorizontal="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -92,7 +210,10 @@
                     android:layout_height="24dp"
                     android:src="@drawable/ic_arrow" />
 
+
+            </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
     </FrameLayout>
 </layout>

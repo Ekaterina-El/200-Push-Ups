@@ -1,139 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="ka.el.a200pushups.viewModel.PushUpsViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".MainActivity">
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/background"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@drawable/push_ups"
-                android:scaleType="centerCrop" />
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true">
-
-                <TextView
-                    android:layout_marginStart="20dp"
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/title"
-                    android:textColor="@color/red"
-                    android:fontFamily="@font/jura"
-                    android:textStyle="bold"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_below="@id/title"
-                    android:id="@+id/week"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{@string/numberOfWeek(viewModel.currentWeek)}"
-                    tools:text="Неделя: 1"
-                    android:textColor="@color/light_gray"
-                    android:fontFamily="@font/jura"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_marginTop="3dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_below="@id/week"
-                    android:id="@+id/day"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{@string/numberOfDay(viewModel.currentDay)}"
-                    tools:text="День: 1"
-                    android:textColor="@color/light_gray"
-                    android:fontFamily="@font/jura"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_marginTop="50dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_below="@id/day"
-                    android:id="@+id/globalGoal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{@string/globalGoal(viewModel.currentGlobalGoal)}"
-                    tools:text="Цель: 200"
-                    android:textColor="@color/light_gray"
-                    android:fontFamily="@font/jura"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_below="@id/title"
-                    android:layout_alignParentEnd="true"
-                    android:id="@+id/level"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{@string/level(viewModel.currentLevel)}"
-                    tools:text="Уровень: 1"
-                    android:textColor="@color/light_gray"
-                    android:fontFamily="@font/jura"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_marginTop="3dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_below="@id/level"
-                    android:layout_alignParentEnd="true"
-                    android:id="@+id/levelName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.currentLevelName}"
-                    tools:text="Новичок"
-                    android:fontFamily="@font/jura"
-                    android:textColor="@color/light_gray"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_marginTop="50dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_below="@id/levelName"
-                    android:layout_alignParentEnd="true"
-                    android:id="@+id/currentMaxPushUps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{@string/maxPushUps(viewModel.currentMaxPushUps)}"
-                    android:fontFamily="@font/jura"
-                    tools:text="0"
-                    android:textColor="@color/light_gray"
-                    android:textSize="18sp" />
-
-            </RelativeLayout>
-
-        </RelativeLayout>
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/nav_host_fragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_graph" />
-
-    </LinearLayout>
 </layout>
