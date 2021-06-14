@@ -22,6 +22,8 @@
     <string name="start_btn">Начать</string>
 
 
+    <string name="train_title">Тренировка</string>
+
     <string name="tester_title">Тест на выносливость</string>
     <string name="tester_description">Выполните максимальное количество отжиманий</string>
     <string name="ready">Готово</string>

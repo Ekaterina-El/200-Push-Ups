@@ -54,7 +54,7 @@ class PushUpsViewModel: ViewModel() {
         val currentWeek = _trainWeekData.getTrainByMaxPushUps(_currentMaxPushUps.value!!)
         _currentTrainWeek.value = currentWeek
 
-        _currentDay.value = 4 //
+        _currentDay.value = 1
         _currentLevel.value = currentWeek.numberOfLevels
         _currentLevelName.value = currentWeek.nameOfLevel
     }
