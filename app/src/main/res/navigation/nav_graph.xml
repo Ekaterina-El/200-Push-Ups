@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nag_graph"
-    app:startDestination="@id/welcomeScreen">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/welcomeScreen"
@@ -20,4 +20,16 @@
         android:label="TrainWeekFragment"
         tools:layout="@layout/fragment_train_week"
         />
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="ka.el.a200pushups.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_welcomeScreen"
+            app:destination="@id/welcomeScreen" />
+        <action
+            android:id="@+id/action_splashFragment_to_trainWeekFragment"
+            app:destination="@id/trainWeekFragment" />
+    </fragment>
 </navigation>

@@ -1,11 +1,12 @@
 package ka.el.a200pushups.fragments
 
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import ka.el.a200pushups.R
 import ka.el.a200pushups.adapter.DaysOfTrainWeekAdapter
@@ -20,6 +21,7 @@ class TrainWeekFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        pushUpsViewModel.setCurrentMaxPushUps(getMaxPushUps())
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_train_week, container, false)
         return binding?.root
     }
@@ -42,6 +44,15 @@ class TrainWeekFragment : Fragment() {
         )
 
         binding!!.recyclerView.adapter = adapter
+    }
+
+    private fun getMaxPushUps(): Int {
+        val sharedPreferences = activity?.getSharedPreferences(
+            getString(R.string.app_shared_preferences_file_name),
+            Context.MODE_PRIVATE
+        )
+
+        return sharedPreferences!!.getInt("MAX_PUSH_UPS_SETTING", 0)
     }
 
     override fun onDestroyView() {

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -25,10 +26,6 @@ class TesterActivity : AppCompatActivity() {
         binder.lifecycleOwner = this
         binder.testerActivity = this
         binder.testerViewModel = viewModel
-
-        viewModel.counterValue.observe(this, { maxPushUps ->
-            saveToSharedPreferencesMaxPushUps(maxPushUps)
-        })
 
         binder.valueCounter.addTextChangedListener(
             object : TextWatcher {
@@ -57,6 +54,7 @@ class TesterActivity : AppCompatActivity() {
     fun ready() {
         val intent = Intent()
         intent.putExtra(WelcomeScreen.TESTING_PUSH_UPS, viewModel.counterValue.value)
+        saveToSharedPreferencesMaxPushUps(viewModel.counterValue.value!!)
         viewModel.setCounterValue(0)
         setResult(RESULT_OK, intent)
         finish()
@@ -71,5 +69,8 @@ class TesterActivity : AppCompatActivity() {
         val spEdit = sharedPreferences.edit()
         spEdit.putInt(getString(R.string.max_push_ups_setting), maxPushUps)
         spEdit.apply()
+
+        Log.d("saveToSharedPreferences", "maxPushUps: ${sharedPreferences.getInt(getString(R.string.max_push_ups_setting), -1)}")
+
     }
 }
