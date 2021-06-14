@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">200 Push Ups</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_shared_preferences_file_name">a_200_push_ups</string>
+    <string name="max_push_ups_setting">MAX_PUSH_UPS_SETTING</string>
 
     <string name="title">Отжимания</string>
     <string name="numberOfWeek">Неделя: %1$s</string>

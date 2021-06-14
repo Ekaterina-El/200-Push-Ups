@@ -1,14 +1,12 @@
 package ka.el.a200pushups
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.widget.addTextChangedListener
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import ka.el.a200pushups.databinding.ActivityTesterBinding
 import ka.el.a200pushups.fragments.WelcomeScreen
@@ -22,23 +20,28 @@ class TesterActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        val binder: ActivityTesterBinding = DataBindingUtil.setContentView(this, R.layout.activity_tester)
-        Log.d("TAG", "viewModel ${viewModel.counterValue.value}")
+        val binder: ActivityTesterBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_tester)
         binder.lifecycleOwner = this
         binder.testerActivity = this
         binder.testerViewModel = viewModel
 
+        viewModel.counterValue.observe(this, { maxPushUps ->
+            saveToSharedPreferencesMaxPushUps(maxPushUps)
+        })
+
         binder.valueCounter.addTextChangedListener(
-            object: TextWatcher {
+            object : TextWatcher {
                 override fun beforeTextChanged(
                     s: CharSequence?,
                     start: Int,
                     count: Int,
                     after: Int
-                ) {}
+                ) {
+                }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if (s.toString().equals("")) {
+                    if (s.toString() == "") {
                         viewModel.setCounterValue(0)
                     } else {
                         viewModel.setCounterValue(s.toString().toInt())
@@ -57,5 +60,16 @@ class TesterActivity : AppCompatActivity() {
         viewModel.setCounterValue(0)
         setResult(RESULT_OK, intent)
         finish()
+    }
+
+    private fun saveToSharedPreferencesMaxPushUps(maxPushUps: Int) {
+        val sharedPreferences = getSharedPreferences(
+            getString(R.string.app_shared_preferences_file_name),
+            Context.MODE_PRIVATE
+        )
+
+        val spEdit = sharedPreferences.edit()
+        spEdit.putInt(getString(R.string.max_push_ups_setting), maxPushUps)
+        spEdit.apply()
     }
 }
