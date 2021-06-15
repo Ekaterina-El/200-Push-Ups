@@ -1,6 +1,7 @@
 package ka.el.a200pushups.fragments
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import ka.el.a200pushups.R
 import ka.el.a200pushups.databinding.FragmentTrainBinding
 import ka.el.a200pushups.viewModel.PushUpsViewModel
@@ -20,6 +22,8 @@ class TrainFragment : Fragment() {
 
     private val pushUpsViewModel: PushUpsViewModel by activityViewModels()
     private val trainViewModel: TrainViewModel by viewModels()
+
+    private lateinit var timer: CountDownTimer
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +45,7 @@ class TrainFragment : Fragment() {
         binding?.apply {
             lifecycleOwner = this@TrainFragment
             trainVM = trainViewModel
+            trainFragment = this@TrainFragment
         }
 
         binding?.valueCounter?.addTextChangedListener(
@@ -60,5 +65,31 @@ class TrainFragment : Fragment() {
 
             }
         )
+    }
+
+    fun completeCurrentSet() {
+        if (trainViewModel.currentSet.value == 4) {
+            MaterialAlertDialogBuilder(requireContext()).setTitle("End!").show()
+        // TODO("Show alert dialog with custom layout and going to TranWeekFragment | Save new current day value in SPref ")
+        } else {
+            if (trainViewModel.isStartedTimer.value == true) {
+                timer.cancel()
+                trainViewModel.skipRes()
+            } else {
+                val timerValue = trainViewModel.thisTrainBreak
+
+                timer = object : CountDownTimer((timerValue * 1000).toLong(), 1000) {
+                    override fun onTick(millisUntilFinished: Long) {
+                        trainViewModel.downTimer()
+                    }
+                    override fun onFinish() {
+                        trainViewModel.skipRes()
+                    }
+                }
+
+                trainViewModel.onTimer()
+                timer.start()
+            }
+        }
     }
 }

@@ -2,169 +2,199 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+
     <data>
+
+        <import type="android.view.View" />
+
         <variable
             name="trainVM"
             type="ka.el.a200pushups.viewModel.TrainViewModel" />
+
+        <variable
+            name="trainFragment"
+            type="ka.el.a200pushups.fragments.TrainFragment" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/purple_700"
-        tools:context=".fragments.TrainFragment"
-        android:padding="20dp">
+        android:padding="20dp"
+        tools:context=".fragments.TrainFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:gravity="center"
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/title"
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/jura"
+                android:gravity="center"
                 android:text="@string/train_title"
                 android:textColor="@color/red"
-                android:fontFamily="@font/jura"
                 android:textSize="25sp" />
 
-            <LinearLayout
-                android:layout_marginTop="40dp"
+            <TextView
+                android:id="@+id/timerValue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/counter"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/jura"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:text="@{trainVM.currentTimerValue}"
+                android:textColor="@color/light_gray"
+                android:textSize="50sp"
+                android:visibility="@{trainVM.isStartedTimer() ? View.VISIBLE : View.GONE}"
+
+                tools:text="03:00"
+                tools:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/counter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="@{trainVM.isStartedTimer() ? View.GONE : View.VISIBLE}">
 
                 <TextView
-                    android:onClick="@{() -> trainVM.decrement()}"
-
                     android:id="@+id/minus"
-                    android:gravity="center"
+
                     android:layout_width="0dp"
-                    android:layout_weight="15"
                     android:layout_height="wrap_content"
+                    android:layout_weight="15"
+                    android:fontFamily="@font/jura"
+                    android:gravity="center"
+                    android:onClick="@{() -> trainVM.decrement()}"
                     android:text="-"
                     android:textColor="@color/light_gray"
-                    android:fontFamily="@font/jura"
                     android:textSize="120sp" />
 
                 <EditText
-                    android:text="@{trainVM.counterValue.toString()}"
-
                     android:id="@+id/value_counter"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
+
                     android:layout_width="0dp"
-                    android:layout_weight="70"
-                    android:layout_marginHorizontal="10dp"
                     android:layout_height="wrap_content"
-                    tools:text="0"
-                    android:inputType="numberDecimal"
-                    android:textColor="@color/light_gray"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="70"
+                    android:background="@android:color/transparent"
                     android:fontFamily="@font/jura"
-                    android:textSize="80sp" />
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:text="@{trainVM.counterValue.toString()}"
+                    android:textColor="@color/light_gray"
+                    android:textSize="80sp"
+                    tools:text="0" />
 
                 <TextView
-                    android:onClick="@{() -> trainVM.increment()}"
-
                     android:id="@+id/plus"
-                    android:gravity="center"
+
                     android:layout_width="0dp"
-                    android:layout_weight="15"
                     android:layout_height="wrap_content"
+                    android:layout_weight="15"
+                    android:fontFamily="@font/jura"
+                    android:gravity="center"
+                    android:onClick="@{() -> trainVM.increment()}"
                     android:text="+"
                     android:textColor="@color/light_gray"
-                    android:fontFamily="@font/jura"
                     android:textSize="100sp" />
             </LinearLayout>
 
             <Button
                 android:id="@+id/ready"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/ready"
-                android:textColor="@color/light_gray"
-                android:fontFamily="@font/jura"
-                android:textStyle="bold"
-                android:textSize="25sp"
+                android:layout_marginTop="20dp"
                 android:background="@android:color/transparent"
+                android:fontFamily="@font/jura"
+                android:gravity="center"
+                android:onClick="@{() -> trainFragment.completeCurrentSet()}"
+                android:text="@string/ready"
                 android:textAllCaps="false"
-                />
-            
+                android:textColor="@color/light_gray"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
             <LinearLayout
-                android:layout_marginTop="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:text="@{trainVM.currentTrainWeek.days[trainVM.currentDay - 1][0].toString()}"
-
                     android:id="@+id/s1"
+
                     android:layout_width="wrap_content"
-                    android:layout_marginHorizontal="10dp"
                     android:layout_height="wrap_content"
-                    tools:text="0"
-                    android:textColor="@color/red"
+                    android:layout_marginHorizontal="10dp"
                     android:fontFamily="@font/jura"
-                    android:textSize="25sp" />
+                    android:text="@{trainVM.currentTrainWeek.days[trainVM.currentDay - 1][0].toString()}"
+                    android:textColor="@{trainVM.currentSet == 0 ? @color/red : @color/light_gray}"
+                    android:textSize="25sp"
+                    tools:text="0"
+                    tools:textColor="@color/red" />
 
                 <TextView
-                    android:text="@{trainVM.currentTrainWeek.days[trainVM.currentDay - 1][1].toString()}"
-
                     android:id="@+id/s2"
                     android:layout_width="wrap_content"
-                    android:layout_marginHorizontal="10dp"
+
                     android:layout_height="wrap_content"
-                    tools:text="0"
-                    android:textColor="@color/light_gray"
+                    android:layout_marginHorizontal="10dp"
                     android:fontFamily="@font/jura"
-                    android:textSize="25sp" />
+                    android:text="@{trainVM.currentTrainWeek.days[trainVM.currentDay - 1][1].toString()}"
+                    android:textColor="@{trainVM.currentSet == 1 ? @color/red : @color/light_gray}"
+                    android:textSize="25sp"
+                    tools:text="0"
+                    tools:textColor="@color/light_gray" />
 
                 <TextView
-                    android:text="@{trainVM.currentTrainWeek.days[trainVM.currentDay - 1][2].toString()}"
-
-
                     android:id="@+id/s3"
                     android:layout_width="wrap_content"
-                    android:layout_marginHorizontal="10dp"
+
+
                     android:layout_height="wrap_content"
-                    tools:text="0"
-                    android:textColor="@color/light_gray"
+                    android:layout_marginHorizontal="10dp"
                     android:fontFamily="@font/jura"
-                    android:textSize="25sp" />
+                    android:text="@{trainVM.currentTrainWeek.days[trainVM.currentDay - 1][2].toString()}"
+                    android:textColor="@{trainVM.currentSet == 2 ? @color/red : @color/light_gray}"
+                    android:textSize="25sp"
+                    tools:text="0"
+                    tools:textColor="@color/light_gray" />
 
                 <TextView
-                    android:text="@{trainVM.currentTrainWeek.days[trainVM.currentDay - 1][3].toString()}"
-
-
                     android:id="@+id/s4"
                     android:layout_width="wrap_content"
-                    android:layout_marginHorizontal="10dp"
+
+
                     android:layout_height="wrap_content"
-                    tools:text="0"
-                    android:textColor="@color/light_gray"
+                    android:layout_marginHorizontal="10dp"
                     android:fontFamily="@font/jura"
-                    android:textSize="25sp"/>
+                    android:text="@{trainVM.currentTrainWeek.days[trainVM.currentDay - 1][3].toString()}"
+                    android:textColor="@{trainVM.currentSet == 3 ? @color/red : @color/light_gray}"
+                    android:textSize="25sp"
+                    tools:text="0"
+                    tools:textColor="@color/light_gray" />
 
                 <TextView
-                    android:text="@{trainVM.currentTrainWeek.days[trainVM.currentDay - 1][4].toString()}"
-
                     android:id="@+id/s5"
                     android:layout_width="wrap_content"
-                    android:layout_marginHorizontal="10dp"
+
                     android:layout_height="wrap_content"
-                    tools:text="0"
-                    android:textColor="@color/light_gray"
+                    android:layout_marginHorizontal="10dp"
                     android:fontFamily="@font/jura"
-                    android:textSize="25sp" />
+                    android:text="@{trainVM.currentTrainWeek.days[trainVM.currentDay - 1][4].toString()}"
+                    android:textColor="@{trainVM.currentSet == 4 ? @color/red : @color/light_gray}"
+                    android:textSize="25sp"
+                    tools:text="0"
+                    tools:textColor="@color/light_gray" />
 
             </LinearLayout>
 
