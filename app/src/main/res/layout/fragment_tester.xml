@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="testerViewModel"
+            type="ka.el.a200pushups.viewModel.TesterViewModel" />
+
+        <variable
+            name="testerFragment"
+            type="ka.el.a200pushups.fragments.TesterFragment" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.TesterFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/purple_700"
+            android:orientation="vertical"
+            tools:context=".TesterActivity">
+
+
+            <ImageView
+                android:id="@+id/background"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/push_ups2" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginHorizontal="30dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/jura"
+                        android:text="@string/tester_title"
+                        android:textColor="@color/red"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/title_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/jura"
+                        android:gravity="center"
+                        android:text="@string/tester_description"
+                        android:textColor="@color/light_gray"
+                        android:textSize="22sp" />
+
+                    <LinearLayout
+                        android:id="@+id/counter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/minus"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="15"
+                            android:fontFamily="@font/jura"
+                            android:gravity="center"
+                            android:onClick="@{() -> testerViewModel.decrement()}"
+                            android:text="-"
+                            android:textColor="@color/light_gray"
+                            android:textSize="120sp" />
+
+                        <EditText
+                            android:id="@+id/value_counter"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_weight="70"
+                            android:background="@android:color/transparent"
+                            android:fontFamily="@font/jura"
+                            android:gravity="center"
+                            android:inputType="numberDecimal"
+                            android:text="@{testerViewModel.counterValue.toString()}"
+                            android:textColor="@color/light_gray"
+                            android:textSize="80sp"
+                            tools:text="0" />
+
+                        <TextView
+                            android:id="@+id/plus"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="15"
+                            android:fontFamily="@font/jura"
+                            android:gravity="center"
+                            android:onClick="@{() -> testerViewModel.increment()}"
+                            android:text="+"
+                            android:textColor="@color/light_gray"
+                            android:textSize="100sp" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/ready"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/jura"
+                        android:gravity="center"
+                        android:onClick="@{() -> testerFragment.ready()}"
+                        android:text="@string/ready"
+                        android:textAllCaps="false"
+                        android:textColor="@color/light_gray"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>

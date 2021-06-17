@@ -4,9 +4,6 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="ka.el.a200pushups.viewModel.PushUpsViewModel" />
     </data>
 
     <androidx.fragment.app.FragmentContainerView

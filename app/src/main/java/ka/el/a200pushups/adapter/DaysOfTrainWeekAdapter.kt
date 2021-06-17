@@ -57,7 +57,9 @@ class DaysOfTrainWeekAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val day = position + 1
 
-        if (days[position][0] != 0) {
+        val isTrainDay = days[position][0] != 0
+
+        if (isTrainDay) {
             // If it`s simple train day //
             holder.numberDayOfWeek.text = day.toString()
             holder.trainSet.text = days[position].joinToString(" ")
@@ -80,7 +82,11 @@ class DaysOfTrainWeekAdapter(
         when {
             day == currentDay -> {
                 holder.statusImg.setImageResource(R.drawable.ic_arrow)
-                holder.statusImg.setOnClickListener { view -> goTrainScreen() }
+                if (isTrainDay) {
+                    holder.itemView.setOnClickListener { view -> goTrainScreen() }
+                } else {
+                    holder.itemView.setOnClickListener { view -> goTesterScreen() }
+                }
             }
             currentDay > day  -> {
                 holder.statusImg.setImageResource(R.drawable.ic_done)
@@ -90,6 +96,10 @@ class DaysOfTrainWeekAdapter(
             }
         }
 
+    }
+
+    private fun goTesterScreen() {
+        navController.navigate(R.id.action_trainWeekFragment_to_testerFragment)
     }
 
     private fun goTrainScreen() {
