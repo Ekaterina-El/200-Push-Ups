@@ -44,5 +44,9 @@
         android:id="@+id/trainFragment"
         android:name="ka.el.a200pushups.fragments.TrainFragment"
         tools:layout="@layout/fragment_train"
-        android:label="TrainFragment" />
+        android:label="TrainFragment" >
+        <action
+            android:id="@+id/action_trainFragment_to_trainWeekFragment"
+            app:destination="@id/trainWeekFragment" />
+    </fragment>
 </navigation>

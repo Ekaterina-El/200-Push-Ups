@@ -2,6 +2,7 @@ package ka.el.a200pushups.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,11 +25,7 @@ class TrainWeekFragment : Fragment() {
     ): View? {
         pushUpsViewModel.setCurrentMaxPushUps(getMaxPushUps())
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_train_week, container, false)
-        return binding?.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         binding?.apply {
             viewModel = pushUpsViewModel
@@ -36,6 +33,7 @@ class TrainWeekFragment : Fragment() {
         }
 
         var trainWeek = pushUpsViewModel.currentTrainWeek.value
+        Log.d("TAG", "onViewCreated")
 
         var adapter = DaysOfTrainWeekAdapter(
             context = requireContext(),
@@ -46,6 +44,21 @@ class TrainWeekFragment : Fragment() {
         )
 
         binding!!.recyclerView.adapter = adapter
+
+        pushUpsViewModel.currentDay.observe(requireActivity(), {
+                newDay -> run {
+            Log.d("TAG", "NEW DAY: ${newDay}")
+            adapter.setCurrentDay(newDay)
+        }
+        })
+
+        return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
     }
 
     private fun getMaxPushUps(): Int {

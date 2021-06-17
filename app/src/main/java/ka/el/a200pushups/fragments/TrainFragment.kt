@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import ka.el.a200pushups.R
 import ka.el.a200pushups.databinding.FragmentTrainBinding
@@ -69,27 +70,44 @@ class TrainFragment : Fragment() {
 
     fun completeCurrentSet() {
         if (trainViewModel.currentSet.value == 4) {
-            MaterialAlertDialogBuilder(requireContext()).setTitle("End!").show()
-        // TODO("Show alert dialog with custom layout and going to TranWeekFragment | Save new current day value in SPref ")
+            endTrain()
         } else {
-            if (trainViewModel.isStartedTimer.value == true) {
-                timer.cancel()
-                trainViewModel.skipRes()
-            } else {
-                val timerValue = trainViewModel.thisTrainBreak
-
-                timer = object : CountDownTimer((timerValue * 1000).toLong(), 1000) {
-                    override fun onTick(millisUntilFinished: Long) {
-                        trainViewModel.downTimer()
-                    }
-                    override fun onFinish() {
-                        trainViewModel.skipRes()
-                    }
-                }
-
-                trainViewModel.onTimer()
-                timer.start()
-            }
+            onReady()
         }
+    }
+
+    private fun onReady() {
+        if (trainViewModel.isStartedTimer.value == true) {
+            skipRes()
+        } else {
+            startResTimer()
+        }
+    }
+
+    private fun startResTimer() {
+        timer = createTimer(trainViewModel.thisTrainBreak)
+        trainViewModel.onTimer()
+        timer.start()
+    }
+
+    private fun createTimer(timerValue: Int) = object : CountDownTimer((timerValue * 1000).toLong(), 1000) {
+        override fun onTick(millisUntilFinished: Long) {
+            trainViewModel.downTimer()
+        }
+        override fun onFinish() {
+            trainViewModel.skipRes()
+        }
+    }
+
+    private fun skipRes() {
+        timer.cancel()
+        trainViewModel.skipRes()
+    }
+
+    private fun endTrain() {
+        MaterialAlertDialogBuilder(requireContext()).setTitle("End!").show()
+        pushUpsViewModel.incrementCurrentDay() // update days
+        findNavController().navigateUp()
+        // TODO("Show alert dialog with custom layout | Save new current day value in SPref ")
     }
 }

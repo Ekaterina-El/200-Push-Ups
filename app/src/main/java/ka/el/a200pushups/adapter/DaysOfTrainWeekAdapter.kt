@@ -21,6 +21,12 @@ class DaysOfTrainWeekAdapter(
     var navController: NavController
 ) : RecyclerView.Adapter<DaysOfTrainWeekAdapter.ViewHolder>() {
 
+    @JvmName("setCurrentDay1")
+    public final fun setCurrentDay(day: Int) {
+        currentDay = day
+        notifyDataSetChanged()
+    }
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val numberDayOfWeek: TextView
         val trainSet: TextView
