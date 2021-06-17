@@ -40,7 +40,7 @@ class TrainViewModel : ViewModel() {
         _currentDay.value = day
 
         _counterValue.value = trainWeek.days[day][0] - 1
-        thisTrainBreak = trainWeek.breaks[day]
+        thisTrainBreak = trainWeek.breaks[day - 1]
     }
 
     var thisTrainBreak = 0

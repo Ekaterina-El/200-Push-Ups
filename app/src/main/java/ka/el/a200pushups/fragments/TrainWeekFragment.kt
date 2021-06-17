@@ -2,7 +2,6 @@ package ka.el.a200pushups.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,15 +24,21 @@ class TrainWeekFragment : Fragment() {
     ): View? {
         pushUpsViewModel.setCurrentMaxPushUps(getMaxPushUps())
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_train_week, container, false)
+        return binding?.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding?.apply {
             viewModel = pushUpsViewModel
             lifecycleOwner = lifecycleOwner
         }
 
+        var currentDay = getCurrentDayOfSP()
+        pushUpsViewModel.setCurrentDay(currentDay!!)
+
         var trainWeek = pushUpsViewModel.currentTrainWeek.value
-        Log.d("TAG", "onViewCreated")
 
         var adapter = DaysOfTrainWeekAdapter(
             context = requireContext(),
@@ -44,22 +49,12 @@ class TrainWeekFragment : Fragment() {
         )
 
         binding!!.recyclerView.adapter = adapter
-
-        pushUpsViewModel.currentDay.observe(requireActivity(), {
-                newDay -> run {
-            Log.d("TAG", "NEW DAY: ${newDay}")
-            adapter.setCurrentDay(newDay)
-        }
-        })
-
-        return binding?.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun getCurrentDayOfSP() = context
+            ?.getSharedPreferences(getString(R.string.app_shared_preferences_file_name), Context.MODE_PRIVATE)
+            ?.getInt(getString(R.string.sp_current_day), 1)
 
-
-    }
 
     private fun getMaxPushUps(): Int {
         val sharedPreferences = activity?.getSharedPreferences(

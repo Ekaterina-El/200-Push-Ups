@@ -67,4 +67,8 @@ class PushUpsViewModel: ViewModel() {
     fun incrementCurrentDay() {
         _currentDay.value = _currentDay.value?.plus(1)
     }
+
+    fun setCurrentDay(currentDay: Int) {
+        _currentDay.value = currentDay
+    }
 }

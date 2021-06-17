@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">200 Push Ups</string>
     <string name="app_shared_preferences_file_name">a_200_push_ups</string>
+    <string name="sp_current_day">CURRENT_DAY</string>
     <string name="max_push_ups_setting">MAX_PUSH_UPS_SETTING</string>
     <string name="loading_time">2000</string>
 

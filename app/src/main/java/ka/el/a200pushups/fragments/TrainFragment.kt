@@ -1,5 +1,6 @@
 package ka.el.a200pushups.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Editable
@@ -106,8 +107,17 @@ class TrainFragment : Fragment() {
 
     private fun endTrain() {
         MaterialAlertDialogBuilder(requireContext()).setTitle("End!").show()
-        pushUpsViewModel.incrementCurrentDay() // update days
         findNavController().navigateUp()
-        // TODO("Show alert dialog with custom layout | Save new current day value in SPref ")
+
+        saveToShapedPreferencesCurrentDay(trainViewModel.currentDay.value?.plus(1))
+//         TODO("Show alert dialog with custom layout")
+    }
+
+    private fun saveToShapedPreferencesCurrentDay(value: Int? = 1) {
+        context
+            ?.getSharedPreferences(getString(R.string.app_shared_preferences_file_name), Context.MODE_PRIVATE)
+            ?.edit()
+            ?.putInt(getString(R.string.sp_current_day), value!!)
+            ?.apply()
     }
 }
